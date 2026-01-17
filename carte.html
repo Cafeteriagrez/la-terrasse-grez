@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notre Carte – La Terrasse</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: linear-gradient(135deg, #ffe6e6 0%, #fff 50%, #ffe6e6 100%);
+      min-height: 100vh;
+    }
+    
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #b50328 0%, #8a0220 100%);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(181, 3, 40, 0.3);
+    }
+    header h1 {
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      margin-bottom: 5px;
+    }
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+    
+    /* Navigation boutons */
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      flex-wrap: wrap;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .nav-btn.primary {
+      background: #b50328;
+      color: white;
+    }
+    .nav-btn.primary:hover {
+      background: #8a0220;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(181, 3, 40, 0.3);
+    }
+    .nav-btn.secondary {
+      background: white;
+      color: #b50328;
+      border: 2px solid #b50328;
+    }
+    .nav-btn.secondary:hover {
+      background: #ffe6e6;
+      transform: translateY(-2px);
+    }
+    
+    /* Menu container */
+    .menu-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
+    }
+    
+    /* Page selector */
+    .page-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .page-tab {
+      padding: 10px 30px;
+      background: white;
+      border: 2px solid #b50328;
+      color: #b50328;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+    .page-tab:hover {
+      background: #ffe6e6;
+    }
+    .page-tab.active {
+      background: #b50328;
+      color: white;
+    }
+    
+    /* Menu images */
+    .menu-page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .menu-page.active {
+      display: block;
+    }
+    .menu-page img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(181, 3, 40, 0.15);
+    }
+    
+    /* All pages view */
+    .menu-all {
+      display: none;
+    }
+    .menu-all.active {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .menu-all img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(181, 3, 40, 0.15);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Footer */
+    footer {
+      background: #b50328;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fa-solid fa-utensils"></i> Notre Carte</h1>
+    <p>Découvrez nos spécialités maison</p>
+  </header>
+  
+  <div class="nav-buttons">
+    <a href="index.html" class="nav-btn secondary"><i class="fa-solid fa-arrow-left"></i> Retour au site</a>
+    <a href="https://www.instagram.com/brasserie.laterrasse" target="_blank" class="nav-btn primary"><i class="fa-brands fa-instagram"></i> Suivez-nous</a>
+  </div>
+  
+  <div class="menu-container">
+    <div class="page-tabs">
+      <button class="page-tab active" onclick="showPage(1)">Page 1</button>
+      <button class="page-tab" onclick="showPage(2)">Page 2</button>
+      <button class="page-tab" onclick="showAll()">Voir tout</button>
+    </div>
+    
+    <div id="page1" class="menu-page active">
+      <img src="menu/page 1 .png" alt="Menu La Terrasse - Page 1">
+    </div>
+    
+    <div id="page2" class="menu-page">
+      <img src="menu/page 2 .png" alt="Menu La Terrasse - Page 2">
+    </div>
+    
+    <div id="allPages" class="menu-all">
+      <img src="menu/page 1 .png" alt="Menu La Terrasse - Page 1">
+      <img src="menu/page 2 .png" alt="Menu La Terrasse - Page 2">
+    </div>
+  </div>
+  
+  <footer>
+    <p>© 2025 La Terrasse – Grez-Doiceau · <a href="index.html">Retour à l'accueil</a></p>
+  </footer>
+  
+  <script>
+    function showPage(num) {
+      // Hide all
+      document.querySelectorAll('.menu-page, .menu-all').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.page-tab').forEach(el => el.classList.remove('active'));
+      
+      // Show selected
+      document.getElementById('page' + num).classList.add('active');
+      document.querySelectorAll('.page-tab')[num - 1].classList.add('active');
+    }
+    
+    function showAll() {
+      // Hide all
+      document.querySelectorAll('.menu-page, .menu-all').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.page-tab').forEach(el => el.classList.remove('active'));
+      
+      // Show all pages
+      document.getElementById('allPages').classList.add('active');
+      document.querySelectorAll('.page-tab')[2].classList.add('active');
+    }
+  </script>
+</body>
+</html>

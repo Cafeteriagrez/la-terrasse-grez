@@ -22,6 +22,33 @@
     h2 { color: #b50328; font-size: 1.4rem; border-bottom: 2px solid #b50328; display: inline-block; margin-bottom: 15px; }
     .horaires-table div { margin: 5px 0; font-size: 1rem; }
     .horaires-table span { display: inline-block; width: 120px; font-weight: bold; }
+    .event-list { max-width: 500px; margin: 0 auto; }
+    .event-item { background: #ffe6e6; border-left: 4px solid #b50328; padding: 15px; margin: 15px 0; text-align: left; border-radius: 0 8px 8px 0; }
+    .event-date { color: #b50328; font-weight: bold; font-size: 0.9rem; }
+    .event-title { font-size: 1.2rem; font-weight: 600; margin: 5px 0; }
+    .event-desc { color: #555; font-size: 0.95rem; }
+    .event-banner { background: linear-gradient(135deg, #b50328 0%, #8a0220 100%); color: white; padding: 15px 20px; text-align: center; animation: pulse 2s infinite; }
+    .event-banner a { color: white; text-decoration: none; }
+    .event-banner-content { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .event-banner i { font-size: 1.3rem; }
+    .event-banner-text { font-size: 1.1rem; font-weight: 600; }
+    .event-banner-date { background: white; color: #b50328; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.9; } }
+    /* Carrousel photos */
+    .food-gallery { background: linear-gradient(135deg, #ffe6e6 0%, #fff 100%); padding: 30px 0; margin: 30px 0; overflow: hidden; position: relative; }
+    .food-gallery::before, .food-gallery::after { content: ''; position: absolute; top: 0; width: 80px; height: 100%; z-index: 2; pointer-events: none; }
+    .food-gallery::before { left: 0; background: linear-gradient(to right, #ffe6e6, transparent); }
+    .food-gallery::after { right: 0; background: linear-gradient(to left, #fff, transparent); }
+    .food-gallery-title { color: #b50328; font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; }
+    .food-slider { display: flex; width: max-content; animation: scroll 30s linear infinite; }
+    .food-slider:hover { animation-play-state: paused; }
+    .food-slide { flex-shrink: 0; width: 280px; height: 200px; margin: 0 15px; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(181, 3, 40, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .food-slide:hover { transform: scale(1.05); box-shadow: 0 12px 35px rgba(181, 3, 40, 0.25); }
+    .food-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .food-slide-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #b50328 0%, #8a0220 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+    .food-slide-placeholder i { font-size: 3rem; margin-bottom: 10px; }
+    .food-slide-placeholder span { font-size: 0.9rem; font-weight: 600; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     footer { background: #b50328; color: white; padding: 20px; font-size: 0.9rem; margin-top: 40px; }
   </style>
 </head>
@@ -33,17 +60,86 @@
   </header>
   <nav>
     <a href="#" aria-label="Accueil">Accueil</a>
+    <a href="#evenements" aria-label="Voir les événements">Événements</a>
     <a href="#horaires" aria-label="Voir les horaires">Horaires</a>
     <a href="#contact" aria-label="Voir la section contact">Contact</a>
   </nav>
+  <div class="event-banner">
+    <a href="#evenements">
+      <div class="event-banner-content">
+        <i class="fa-solid fa-star"></i>
+        <span class="event-banner-text"> Karaoke – Venez chanter avec nous !</span>
+        <span class="event-banner-date">27 Janvier</span>
+        <i class="fa-solid fa-star"></i>
+      </div>
+    </a>
+  </div>
   <div class="container">
-    <!-- <div class="info-box">Salon des sports le dimanche 31/07/2025 de 14h à 17h</div> -->
-    <a class="button" href="https://www.canva.com/design/DAGr3bufgkI/xaQLQkrJsvZWOmVyVMNkkA/view" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-utensils"></i> Voir notre carte</a>
+    <a class="button" href="carte.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-utensils"></i> Voir notre carte</a>
     <a class="button" href="https://www.google.com/maps/place/99+Chauss%C3%A9e+de+Wavre,+1390+Grez-Doiceau" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Nous trouver</a>
     <a class="button" href="https://www.instagram.com/brasserie.laterrasse?igsh=MWh0aTE4cmRtaGhuaA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Suivez-nous sur Instagram</a>
     <a class="button" href="https://g.page/r/Ca5Kjs1KxBG7EBM/review" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-comment-dots"></i> Laisser un avis</a>
-    <a class="button" href="https://www.sport-finder.com/fr/center/hall-omnisports-de-grez-doiceau" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Réserver un terrain de padel</a>
+    <!-- <a class="button" href="#evenements"><i class="fa-solid fa-calendar-days"></i> Nos événements</a> -->
     <a class="button" href="https://forms.gle/d2top51yoQHr381D8" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-calendar-check"></i> Organiser un événement</a>
+  </div>
+
+  <!-- Carrousel de photos de nourriture -->
+  <div class="food-gallery">
+    <div class="food-gallery-title"><i class="fa-solid fa-utensils"></i> Nos spécialités</div>
+    <div class="food-slider">
+      <div class="food-slide">
+        <img src="photos/2PH.JPG" alt="Hot-dog maison">
+      </div>
+      <div class="food-slide">
+        <img src="photos/4B.jpg" alt="Nachos">
+      </div>
+      <div class="food-slide">
+        <img src="photos/6PH.JPG" alt="Burger">
+      </div>
+      <div class="food-slide">
+        <img src="photos/7JL.jpg" alt="Boissons">
+      </div>
+      <div class="food-slide">
+        <img src="photos/8PH.JPG" alt="Snacks">
+      </div>
+      <div class="food-slide">
+        <img src="photos/9B.jpg" alt="Desserts">
+      </div>
+      <!-- effet infini le carroussel de photo-->
+      <div class="food-slide">
+        <img src="photos/2PH.JPG" alt="Hot-dog maison">
+      </div>
+      <div class="food-slide">
+        <img src="photos/4B.jpg" alt="Nachos">
+      </div>
+      <div class="food-slide">
+        <img src="photos/6PH.JPG" alt="Burger">
+      </div>
+      <div class="food-slide">
+        <img src="photos/7JL.jpg" alt="Boissons">
+      </div>
+      <div class="food-slide">
+        <img src="photos/8PH.JPG" alt="Snacks">
+      </div>
+      <div class="food-slide">
+        <img src="photos/9B.jpg" alt="Desserts">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section" id="evenements">
+      <h2><i class="fa-solid fa-calendar-days"></i> Événements à venir</h2>
+      <div class="event-list">
+        <div class="event-item">
+          <div class="event-date">Le Mardi 27/01 de 20h à 00h30</div>
+          <div class="event-title">Karaoke</div>
+          <div class="event-desc">Venez chanter avec nous !</div>
+        </div>
+        <!-- autres événements ici -->
+      </div>
+      <p style="font-size: 0.9rem; color: #555; margin-top: 15px;">Restez connectés pour découvrir nos prochains événements !</p>
+    </div>
     <div class="section" id="horaires">
       <h2><i class="fa-regular fa-clock"></i> Nos horaires</h2>
       <div class="horaires-table">
