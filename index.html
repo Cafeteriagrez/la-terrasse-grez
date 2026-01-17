@@ -49,6 +49,23 @@
     .food-slide-placeholder i { font-size: 3rem; margin-bottom: 10px; }
     .food-slide-placeholder span { font-size: 0.9rem; font-weight: 600; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* Animations d'entrée */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .button { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(181, 3, 40, 0.3); }
+    nav a { position: relative; transition: color 0.3s ease; }
+    nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #b50328; transition: width 0.3s ease; }
+    nav a:hover::after { width: 100%; }
+    /* Compteur événement */
+    .countdown { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+    .countdown-item { background: white; color: #b50328; padding: 10px 15px; border-radius: 10px; min-width: 70px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .countdown-number { font-size: 1.8rem; font-weight: 700; display: block; }
+    .countdown-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.8; }
+    .countdown-title { font-size: 0.95rem; margin-bottom: 10px; opacity: 0.9; }
     footer { background: #b50328; color: white; padding: 20px; font-size: 0.9rem; margin-top: 40px; }
   </style>
 </head>
@@ -64,23 +81,28 @@
     <a href="#horaires" aria-label="Voir les horaires">Horaires</a>
     <a href="#contact" aria-label="Voir la section contact">Contact</a>
   </nav>
-  <div class="event-banner">
+  <div class="event-banner" id="eventBanner">
     <a href="#evenements">
       <div class="event-banner-content">
         <i class="fa-solid fa-star"></i>
-        <span class="event-banner-text"> Karaoke – Venez chanter avec nous !</span>
-        <span class="event-banner-date">27 Janvier</span>
-        <i class="fa-solid fa-star"></i>
+        <span class="event-banner-text" id="bannerText">Chargement...</span>
+        <span class="event-banner-date" id="bannerDate"></span>
       </div>
     </a>
+    <div class="countdown-title">C'est dans...</div>
+    <div class="countdown" id="countdown">
+      <div class="countdown-item"><span class="countdown-number" id="days">--</span><span class="countdown-label">Jours</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="hours">--</span><span class="countdown-label">Heures</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="minutes">--</span><span class="countdown-label">Min</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="seconds">--</span><span class="countdown-label">Sec</span></div>
+    </div>
   </div>
   <div class="container">
-    <a class="button" href="carte.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-utensils"></i> Voir notre carte</a>
-    <a class="button" href="https://www.google.com/maps/place/99+Chauss%C3%A9e+de+Wavre,+1390+Grez-Doiceau" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Nous trouver</a>
-    <a class="button" href="https://www.instagram.com/brasserie.laterrasse?igsh=MWh0aTE4cmRtaGhuaA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Suivez-nous sur Instagram</a>
-    <a class="button" href="https://g.page/r/Ca5Kjs1KxBG7EBM/review" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-comment-dots"></i> Laisser un avis</a>
-    <!-- <a class="button" href="#evenements"><i class="fa-solid fa-calendar-days"></i> Nos événements</a> -->
-    <a class="button" href="https://forms.gle/d2top51yoQHr381D8" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-calendar-check"></i> Organiser un événement</a>
+    <a class="button fade-in" href="carte.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-utensils"></i> Voir notre carte</a>
+    <a class="button fade-in fade-in-delay-1" href="https://www.google.com/maps/place/99+Chauss%C3%A9e+de+Wavre,+1390+Grez-Doiceau" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> Nous trouver</a>
+    <a class="button fade-in fade-in-delay-2" href="https://www.instagram.com/brasserie.laterrasse?igsh=MWh0aTE4cmRtaGhuaA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Suivez-nous sur Instagram</a>
+    <a class="button fade-in fade-in-delay-3" href="https://g.page/r/Ca5Kjs1KxBG7EBM/review" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-comment-dots"></i> Laisser un avis</a>
+    <a class="button fade-in" href="https://forms.gle/d2top51yoQHr381D8" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-calendar-check"></i> Organiser un événement</a>
   </div>
 
   <!-- Carrousel de photos de nourriture -->
@@ -128,19 +150,14 @@
   </div>
 
   <div class="container">
-    <div class="section" id="evenements">
+    <div class="section fade-in" id="evenements">
       <h2><i class="fa-solid fa-calendar-days"></i> Événements à venir</h2>
-      <div class="event-list">
-        <div class="event-item">
-          <div class="event-date">Le Mardi 27/01 de 20h à 00h30</div>
-          <div class="event-title">Karaoke</div>
-          <div class="event-desc">Venez chanter avec nous !</div>
-        </div>
-        <!-- autres événements ici -->
+      <div class="event-list" id="eventList">
+        <!-- Généré automatiquement -->
       </div>
       <p style="font-size: 0.9rem; color: #555; margin-top: 15px;">Restez connectés pour découvrir nos prochains événements !</p>
     </div>
-    <div class="section" id="horaires">
+    <div class="section fade-in" id="horaires">
       <h2><i class="fa-regular fa-clock"></i> Nos horaires</h2>
       <div class="horaires-table">
         <div><span>Lundi</span>17h00 - 1h00</div>
@@ -153,11 +170,135 @@
       </div>
       <p style="font-size: 0.9rem; color: #555;">Les horaires peuvent varier selon les activités sportives et les vacances scolaires.</p>
     </div>
-    <div class="section" id="contact">
+    <div class="section fade-in" id="contact">
       <h2><i class="fa-regular fa-envelope"></i> Contact</h2>
       <p style="font-size: 1.1rem;">cafeteria.hall.grez@gmail.com</p>
     </div>
   </div>
   <footer>© 2025 La Terrasse – Grez-Doiceau · Site officiel</footer>
+
+  <script>
+    // ╔════════════════════════════════════════════════════════════════╗
+    // ║  🎯 CONFIGURATION DES ÉVÉNEMENTS - MODIFIER ICI UNIQUEMENT !  ║
+    // ╚════════════════════════════════════════════════════════════════╝
+    
+    const EVENEMENTS = [
+      {
+        titre: "Karaoke",           // Nom de l'événement
+        description: "Venez chanter avec nous !",  // Description courte
+        date: "2026-01-27",         // Format: ANNEE-MOIS-JOUR
+        heure: "20:00",             // Format: HH:MM
+        heureFin: "00:30",          // Heure de fin (optionnel)
+        emoji: ""                 // Emoji pour la bannière
+      }
+      // Pour ajouter un autre événement, copier le bloc ci-dessus avec une virgule
+      // Exemple:
+      // ,{
+      //   titre: "Soirée Quiz",
+      //   description: "Testez vos connaissances !",
+      //   date: "2026-02-14",
+      //   heure: "19:30",
+      //   heureFin: "23:00",
+      //   emoji: "🧠"
+      // }
+    ];
+    
+    // ╔════════════════════════════════════════════════════════════════╗
+    // ║  🚫 NE PAS MODIFIER EN DESSOUS DE CETTE LIGNE                 ║
+    // ╚════════════════════════════════════════════════════════════════╝
+    
+    // Trouver le prochain événement
+    const now = new Date();
+    const prochainEvent = EVENEMENTS
+      .map(e => ({ ...e, dateObj: new Date(e.date + 'T' + e.heure) }))
+      .filter(e => e.dateObj > now)
+      .sort((a, b) => a.dateObj - b.dateObj)[0];
+    
+    // Formater la date en français
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const options = { day: 'numeric', month: 'long' };
+      return date.toLocaleDateString('fr-FR', options);
+    }
+    
+    function formatDateComplete(dateStr, heure, heureFin) {
+      const date = new Date(dateStr);
+      const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+      const jour = jours[date.getDay()];
+      const numero = date.getDate();
+      const mois = (date.getMonth() + 1).toString().padStart(2, '0');
+      let texte = `Le ${jour} ${numero}/${mois} à ${heure.replace(':', 'h')}`;
+      if (heureFin) texte += ` - ${heureFin.replace(':', 'h')}`;
+      return texte;
+    }
+    
+    // Mettre à jour la bannière
+    if (prochainEvent) {
+      document.getElementById('bannerText').textContent = 
+        `${prochainEvent.emoji} ${prochainEvent.titre} – ${prochainEvent.description}`;
+      document.getElementById('bannerDate').textContent = formatDate(prochainEvent.date);
+    } else {
+      document.getElementById('eventBanner').style.display = 'none';
+    }
+    
+    // Générer la liste des événements
+    const eventList = document.getElementById('eventList');
+    const evenementsFuturs = EVENEMENTS
+      .filter(e => new Date(e.date + 'T' + e.heure) > now)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    if (evenementsFuturs.length === 0) {
+      eventList.innerHTML = '<p style="color: #555;">Aucun événement prévu pour le moment.</p>';
+    } else {
+      eventList.innerHTML = evenementsFuturs.map(e => `
+        <div class="event-item">
+          <div class="event-date">${formatDateComplete(e.date, e.heure, e.heureFin)}</div>
+          <div class="event-title">${e.emoji} ${e.titre}</div>
+          <div class="event-desc">${e.description}</div>
+        </div>
+      `).join('');
+    }
+    
+    // Compteur
+    function updateCountdown() {
+      if (!prochainEvent) {
+        document.querySelector('.countdown-title').style.display = 'none';
+        document.getElementById('countdown').style.display = 'none';
+        return;
+      }
+      
+      const eventTime = prochainEvent.dateObj.getTime();
+      const now = new Date().getTime();
+      const distance = eventTime - now;
+      
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = 
+          '<div class="countdown-item" style="min-width: auto; padding: 10px 25px;"><span style="font-size: 1.1rem; font-weight: 600;">🎉 C\'est maintenant !</span></div>';
+        document.querySelector('.countdown-title').style.display = 'none';
+        return;
+      }
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Animation d'entrée au scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
